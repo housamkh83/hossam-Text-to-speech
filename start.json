@@ -1,0 +1,26 @@
+{
+  "daemon": true,
+  "run": [
+    {
+      "method": "shell.run",
+      "params": {
+        "venv": "env",
+        "env": {
+          "XDG_DATA_HOME": "./cache/HF_HOME/hub",
+          "ALLOW_FILE_UPLOAD": "True",
+          "COQUI_TOS_AGREED": "1"
+        },
+        "message": "python app.py",
+        "on": [{
+          "event": "/(http://[0-9.:]+)/",
+          "done": true
+        }]
+      }
+    }, {
+      "method": "local.set",
+      "params": {
+        "url": "{{input.event[0]}}"
+      }
+    } 
+  ]
+}

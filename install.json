@@ -1,0 +1,31 @@
+{
+  "run": [{
+    "method": "shell.run",
+    "params": {
+      "message": "{{os.platform() === 'win32' ? '' : 'brew install mecab'}}"
+    }
+  },
+  {
+    "method": "shell.run",
+    "params": {
+      "venv": "env",
+      "message": [
+        "uv pip install gradio==4.44.0 pydantic==2.10.6",
+        "uv pip install -r requirements.txt"
+      ]
+    }
+  },
+  {
+    "method": "script.start",
+    "params": {
+      "uri": "torch.js",
+      "params": {
+        "venv": "env"
+      }
+    }
+  },
+  {
+    "method": "notify",
+    "params": { "html": "Click the 'start' tab to get started!" }
+  }]
+}
